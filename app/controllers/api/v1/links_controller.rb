@@ -1,5 +1,4 @@
 class Api::V1::LinksController < ApplicationController
-
   def create
     @link = Link.new link_params
     if @link.save
@@ -24,8 +23,6 @@ class Api::V1::LinksController < ApplicationController
   private
 
   def link_params
-    params.permit(:title, :url, :read)
+    params.permit(:title, :url, :read).merge(user_id: current_user.id)
   end
 end
-
-# add comment
