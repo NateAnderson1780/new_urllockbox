@@ -5,6 +5,9 @@ $(document).ready(function(){
   $newLinkUrl  = $("#link-url");
 
   $("#new-link").on('submit', createLink);
+  
+  $.get('http://localhost:3001/api/v1/hot_reads')
+   .then(renderHotAndTop)
 })
 
 function createLink (event){
