@@ -5,6 +5,9 @@ $(document).ready(function(){
   $newLinkUrl  = $("#link-url");
 
   $("#new-link").on('submit', createLink);
+  
+  $.get('http://localhost:3001/api/v1/hot_reads')
+   .then(renderHotAndTop)
 })
 
 function createLink (event){
@@ -56,3 +59,28 @@ function displayFailure(failureData){
   $('.alert').html("FAILED attempt to create new Link: " + failureData.responseText);
   clearLink();
 }
+
+function renderHotAndTop(hotReads) {
+  $("#links-list").children().each(function() {
+    var url = $(this).find('.link-url').text().split(": ")[1]
+  
+    if (url == hotReads[0].url) {
+      $(this).find('#top').text('TOP');
+    } else if(checkHotStatus(hotReads, url)) {
+      $(this).find('#hot').text('HOT');
+    }
+  })
+}
+
+function checkHotStatus (hotReads, url) {
+  for (var index = 0; index < hotReads.length; index++) {
+    var read = hotReads[index];
+    
+    if(read.url == url) {
+      return true
+    }
+  }
+}
+
+ 
+ 
