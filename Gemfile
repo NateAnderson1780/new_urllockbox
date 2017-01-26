@@ -38,9 +38,13 @@ group :development, :test do
   gem 'simplecov', :require => false
   gem 'database_cleaner'
   gem 'factory_girl_rails'
-  gem 'shoulda-matchers'
   gem 'poltergeist'
   gem 'phantomjs', :require => 'phantomjs/poltergeist'
   gem 'vcr'
   gem 'webmock'
+end
+
+group :test do
+  gem "shoulda-matchers", ">= 3.0.0",
+    require: false
 end
