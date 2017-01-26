@@ -6,7 +6,7 @@ $(document).ready(function(){
 
   $("#new-link").on('submit', createLink);
   
-  $.get('http://localhost:3001/api/v1/hot_reads')
+  $.get('https://shielded-forest-19678.herokuapp.com/api/v1/hot_reads')
    .then(renderHotAndTop)
 })
 

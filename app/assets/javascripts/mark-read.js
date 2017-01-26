@@ -37,7 +37,7 @@ function sendToHotReads() {
   var linkUrl = $(this).parent().siblings('.link-url').text().split(': ')[1];
   
   $.ajax({
-    url: "http://localhost:3001/hot_reads",
+    url: "https://shielded-forest-19678.herokuapp.com/api/v1/hot_reads",
     method: 'POST',
     data: {url: linkUrl}
   })
