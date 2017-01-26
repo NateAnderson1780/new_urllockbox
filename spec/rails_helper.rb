@@ -6,6 +6,12 @@ require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
+Capybara.javascript_driver = :poltergeist
+
+options = {js_errors: false}
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, options)
+end
 
 Capybara.javascript_driver = :poltergeist
 
@@ -98,3 +104,13 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 end
+
+def user_logs_in
+  User.create(email: "nate@nate.com", password: "nate", password_confirmation: "nate")
+  visit '/'
+  
+  fill_in "email", with: "nate@nate.com"
+  fill_in "password", with: "nate"
+  click_on "Submit"
+end
+
